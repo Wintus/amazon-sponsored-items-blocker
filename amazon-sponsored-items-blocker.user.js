@@ -16,6 +16,8 @@ const label = "amazon-sponsored-items-blocker";
 const mainId = "search";
 const listClass = "s-main-slot";
 const adClass = "AdHolder"; // direct child of the above
+const wideClass = "s-widget" // direct child of listClass
+const dataComponentType = "s-ads-metrics" // direct child of listClass
 
 console.log(`${label}: started`);
 
@@ -56,6 +58,14 @@ const main = document
   .item(0);
 if (main) {
   // initial
+  const wideAds =
+    Array.from(main.getElementsByClassName(wideClass))
+         .filter(({ firstElementChild }) =>
+                   firstElementChild instanceof HTMLElement &&
+                   firstElementChild.dataset.componentType === dataComponentType);
+  for (const wideAd of wideAds) {
+    wideAd.remove();
+  }
   removeSponsoredAds(Array.from(main.children));
   // changes
   observer.observe(main, {
