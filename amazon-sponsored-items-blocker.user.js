@@ -17,6 +17,8 @@ const mainId = "search";
 const listClass = "s-main-slot";
 const adClass = "AdHolder"; // direct child of the above
 
+console.log(`${label}: started`);
+
 /**
  * @param {Node} node
  * @return {boolean} node is HTMLElement
