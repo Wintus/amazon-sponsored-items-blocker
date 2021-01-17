@@ -21,13 +21,13 @@ const isAd = node =>
     node.classList.contains(adClass);
 
 /**
- * @param {MutationRecord[]} mutations
+ * @param {Node[]} nodes
  */
-const removeSponsoredAds = mutations => {
+const removeSponsoredAds = nodes => {
     /**
      * @type {HTMLElement[]}
      */
-    const ads = mutations.flatMap(({target: {childNodes}}) => Array.from(childNodes)).filter(isAd);
+    const ads = nodes.filter(isAd);
     console.debug(`${label}: ads:`, ads);
 
     for (const ad of ads) {
@@ -35,7 +35,11 @@ const removeSponsoredAds = mutations => {
     }
     console.log(`${label}: ${ads.length} ads removed!`);
 };
-const observer = new MutationObserver(removeSponsoredAds);
+
+const observer = new MutationObserver(mutations => {
+    const nodes = mutations.flatMap(({target: {childNodes}}) => Array.from(childNodes));
+    removeSponsoredAds(nodes);
+});
 
 /**
  * @type {Element | null}
