@@ -16,7 +16,11 @@ const mainId = 'search';
 const listClass = 's-main-slot';
 const adClass = 'AdHolder'; // direct child of the above
 
-const isAd = node =>
+/**
+ * @param {Node} node
+ * @return {boolean} node is HTMLElement
+ */
+const isAd = (node) =>
     node instanceof HTMLElement &&
     node.classList.contains(adClass);
 
