@@ -46,6 +46,9 @@ const observer = new MutationObserver(mutations => {
  */
 const main = document.getElementById(mainId).getElementsByClassName(listClass).item(0);
 if (main) {
+    // initial
+    removeSponsoredAds(Array.from(main.children));
+    // changes
     observer.observe(main, {
         childList: true,
         subtree: true,
