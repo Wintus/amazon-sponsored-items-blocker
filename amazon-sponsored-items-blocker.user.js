@@ -14,7 +14,7 @@
 const label = 'amazon-sponsored-items-blocker';
 const mainId = 'search';
 const listClass = 's-main-slot';
-const adClass = 'AdHolder';
+const adClass = 'AdHolder'; // direct child of the above
 
 const isAd = node =>
     node instanceof HTMLElement &&
