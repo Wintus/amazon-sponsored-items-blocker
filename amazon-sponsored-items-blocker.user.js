@@ -40,10 +40,7 @@ const removeSponsoredAds = (nodes) => {
 };
 
 const observer = new MutationObserver((mutations) => {
-  const nodes = mutations.flatMap(({ target: { childNodes }, addedNodes }) => [
-    ...childNodes,
-    ...addedNodes,
-  ]);
+  const nodes = mutations.flatMap(({ addedNodes }) => [...addedNodes]);
   removeSponsoredAds(nodes);
 });
 
