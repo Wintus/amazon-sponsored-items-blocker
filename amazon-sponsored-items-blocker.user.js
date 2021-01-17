@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Amazon sponsored items blocker
 // @namespace    https://github.com/Wintus/amazon-sponsored-items-blocker
-// @version      0.2
+// @version      0.2.1
 // @description  Blocks sponsored search results on Amazon
 // @include      *://www.amazon.*/*
 // @include      *://www.amazon.co.*/*
