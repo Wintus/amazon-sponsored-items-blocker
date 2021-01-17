@@ -28,7 +28,7 @@ const removeSponsoredAds = nodes => {
      * @type {HTMLElement[]}
      */
     const ads = nodes.filter(isAd);
-    console.debug(`${label}: ads:`, ads);
+    console.debug(`${label}: ads`, ads);
 
     for (const ad of ads) {
         ad.remove();
