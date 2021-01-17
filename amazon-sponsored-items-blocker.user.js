@@ -55,7 +55,6 @@ if (main) {
     // changes
     observer.observe(main, {
         childList: true,
-        subtree: true,
     });
 } else {
     console.error(`${label}: no target`);
