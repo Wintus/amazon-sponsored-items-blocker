@@ -63,6 +63,7 @@ if (main) {
          .filter(({ firstElementChild }) =>
                    firstElementChild instanceof HTMLElement &&
                    firstElementChild.dataset.componentType === dataComponentType);
+  console.debug(`${label}: ads`, wideAds);
   for (const wideAd of wideAds) {
     wideAd.remove();
   }
