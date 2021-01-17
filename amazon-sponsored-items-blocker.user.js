@@ -60,9 +60,12 @@ if (main) {
   // initial
   const wideAds =
     Array.from(main.getElementsByClassName(wideClass))
-         .filter(({ firstElementChild }) =>
-                   firstElementChild instanceof HTMLElement &&
-                   firstElementChild.dataset.componentType === dataComponentType);
+         .filter(({ dataset, firstElementChild: elem }) =>
+                   dataset.index === '0' || (
+                     elem instanceof HTMLElement &&
+                     elem.dataset.componentType === dataComponentType
+                   ),
+         );
   console.debug(`${label}: ads`, wideAds);
   for (const wideAd of wideAds) {
     wideAd.remove();
