@@ -10,6 +10,7 @@
 // ==/UserScript==
 
 // using: ES2015
+// using: DOM4
 
 const label = "amazon-sponsored-items-blocker";
 const mainId = "search";
