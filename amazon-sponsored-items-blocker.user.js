@@ -30,12 +30,10 @@ const isAd = (node) =>
 
 /**
  * @param {Node[]} nodes
+ * @param {function(Node|Element): boolean} pred
  */
-const removeSponsoredAds = (nodes) => {
-  /**
-   * @type {HTMLElement[]}
-   */
-  const ads = nodes.filter(isAd);
+const removeSponsoredAds = (nodes, pred) => {
+  const ads = nodes.filter(pred);
   console.debug(`${label}: ads`, ads);
 
   for (const ad of ads) {
@@ -46,7 +44,7 @@ const removeSponsoredAds = (nodes) => {
 
 const observer = new MutationObserver((mutations) => {
   const nodes = mutations.flatMap(({ addedNodes }) => [...addedNodes]);
-  removeSponsoredAds(nodes);
+  removeSponsoredAds(nodes, isAd);
 });
 
 /**
@@ -58,19 +56,14 @@ const main = document
   .item(0);
 if (main) {
   // initial
-  const wideAds =
-    Array.from(main.getElementsByClassName(wideClass))
-         .filter(({ dataset, firstElementChild: elem }) =>
-                   dataset.index === '0' || (
-                     elem instanceof HTMLElement &&
-                     elem.dataset.componentType === dataComponentType
-                   ),
-         );
-  console.debug(`${label}: ads`, wideAds);
-  for (const wideAd of wideAds) {
-    wideAd.remove();
-  }
-  removeSponsoredAds(Array.from(main.children));
+  const elements = Array.from(main.getElementsByClassName(wideClass));
+  const predicate = ({ dataset, firstElementChild: elem }) =>
+    dataset.index === '0' || (
+      elem instanceof HTMLElement &&
+      elem.dataset.componentType === dataComponentType
+    );
+  removeSponsoredAds(elements, predicate);
+  removeSponsoredAds(Array.from(main.children), isAd);
   // changes
   observer.observe(main, {
     childList: true,
